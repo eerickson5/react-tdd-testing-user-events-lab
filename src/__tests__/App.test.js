@@ -93,13 +93,42 @@ test("the checkboxes are initially unchecked", () => {
 
 // Newsletter Form - Adding Responses
 test("the page shows information the user types into the name and email address form fields", () => {
-  // your test code here
+  render(<App/>)
+  const nameForm = screen.getAllByRole("textbox")[0]
+  const emailForm = screen.getAllByRole("textbox")[1]
+
+  userEvent.type(nameForm, "Elise")
+  userEvent.type(emailForm, "elise@email.com")
+
+  const name = screen.getByText("Elise")
+  expect(name).toBeInTheDocument()
+
+  const email = screen.getByText("elise@email.com")
+  expect(email).toBeInTheDocument()
 });
 
 test("checked status of checkboxes changes when user clicks them", () => {
+  render(<App/>)
+  const box1 = screen.getAllByRole("checkbox")[0]
+  const box2 = screen.getAllByRole("checkbox")[1]
+  const box3 = screen.getAllByRole("checkbox")[2]
+
+  userEvent.click(box1)
+  userEvent.click(box2)
+  userEvent.click(box3)
+
+  expect(box1).toBeChecked()
+  expect(box2).toBeChecked()
+  expect(box3).toBeChecked()
   // your test code here
 });
 
 test("a message is displayed when the user clicks the Submit button", () => {
-  // your test code here
+  render(<App/>)
+  const button = screen.getByText("Submit")
+
+  userEvent.click(button)
+
+  const submitted = screen.getByText("Done!")
+  expect(submitted).toBeInTheDocument()
 });

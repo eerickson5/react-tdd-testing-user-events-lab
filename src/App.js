@@ -5,8 +5,15 @@ function App() {
     name: "", email: "", interest1: false, interest2: false, interest3: false
   })
 
+  const [wasSubmitted, setWasSubmitted] = useState(false)
+
   const changeInput = (e) => {
     setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    setWasSubmitted(true)
   }
 
   return (
@@ -24,10 +31,12 @@ function App() {
         mollit anim id est laborum.
       </p>
 
-      <form>
+      <form onSubmit={handleSubmit}>
         <div>
-          <input type="text" name="name" onChange={changeInput} value={formData.name}/>
-          <input type="text" name="email" onChange={changeInput} value={formData.email}/>
+          <input type="text" name="name" onChange={changeInput} value={formData.name} id="name"/>
+          <label>{formData.name}</label>
+          <input type="text" name="email" onChange={changeInput} value={formData.email} id="email"/>
+          <label>{formData.email}</label>
         </div>
         
 
@@ -37,7 +46,11 @@ function App() {
             <input type="checkbox" name="interest3" onChange={changeInput} value={formData.interest3}/>
         </div>
 
+        <button type="submit">Submit</button>
+
       </form>
+
+      <h3>{wasSubmitted ? "Done!" : null}</h3>
 
       <div>
         <a href="https://github.com">GitHub</a>
