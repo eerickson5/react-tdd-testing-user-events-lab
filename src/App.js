@@ -1,4 +1,14 @@
+import { useState } from "react";
 function App() {
+
+  const[formData, setFormData] = useState({
+    name: "", email: "", interest1: false, interest2: false, interest3: false
+  })
+
+  const changeInput = (e) => {
+    setFormData({...formData, [e.target.name]: e.target.value})
+  }
+
   return (
     <main>
       <h1>Hi, I'm (your name)</h1>
@@ -13,6 +23,21 @@ function App() {
         occaecat cupidatat non proident, sunt in culpa qui officia deserunt
         mollit anim id est laborum.
       </p>
+
+      <form>
+        <div>
+          <input type="text" name="name" onChange={changeInput} value={formData.name}/>
+          <input type="text" name="email" onChange={changeInput} value={formData.email}/>
+        </div>
+        
+
+        <div>
+            <input type="checkbox" name="interest1" onChange={changeInput} value={formData.interest1}/>
+            <input type="checkbox" name="interest2" onChange={changeInput} value={formData.interest2}/>
+            <input type="checkbox" name="interest3" onChange={changeInput} value={formData.interest3}/>
+        </div>
+
+      </form>
 
       <div>
         <a href="https://github.com">GitHub</a>

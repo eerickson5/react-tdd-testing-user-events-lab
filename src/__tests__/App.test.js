@@ -1,6 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import '@testing-library/jest-dom';
-
+import userEvent from "@testing-library/user-event";
 import App from "../App";
 
 // Portfolio Elements
@@ -66,14 +66,28 @@ test("displays the correct links", () => {
 
 // Newsletter Form - Initial State
 test("the form includes text inputs for name and email address", () => {
-  // your test code here
+  render(<App/>)
+
+  const inputs = screen.getAllByRole("textbox")
+  
+  expect(inputs.length).toBe(2)
 });
 
 test("the form includes three checkboxes to select areas of interest", () => {
+  render(<App/>)
+  const boxes = screen.getAllByRole("checkbox")
+  expect(boxes.length).toBe(3)
   // your test code here
 });
 
 test("the checkboxes are initially unchecked", () => {
+  render(<App/>)
+  const boxes = screen.getAllByRole("checkbox")
+  expect(boxes[0]).not.toBeChecked()
+
+  expect(boxes[1]).not.toBeChecked()
+
+  expect(boxes[2]).not.toBeChecked()
   // your test code here
 });
 
